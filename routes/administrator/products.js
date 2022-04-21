@@ -16,11 +16,7 @@ router.get(
   administratorProductID
 );
 
-router.post(
-  "/administrator/products/create",
-  somemiddleware,
-  administratorProductsCreate
-);
+router.post("/administrator/products/create", administratorProductsCreate);
 
 router.get(
   "/administrator/product/:ID/edit",
