@@ -5,12 +5,12 @@ var cors = require("cors");
 require("dotenv").config();
 
 // require routes
-var index = require("./routes/index");
-var administratorHome = require("./routes/administrator/home");
+// var index = require("./routes/index");
+// var administratorHome = require("./routes/administrator/home");
 var administratorProducts = require("./routes/administrator/products");
-var administratorOrders = require("./routes/administrator/orders");
-var administratorAccount = require("./routes/administrator/account");
-var customerHome = require("./routes/customer/home");
+// var administratorOrders = require("./routes/administrator/orders");
+// var administratorAccount = require("./routes/administrator/account");
+// var customerHome = require("./routes/customer/home");
 
 // env
 var dbUrl = process.env.DB_URL;
@@ -28,7 +28,7 @@ connection.once("open", function () {
 });
 
 // routes
-app.use(index);
+//app.use(index);
 app.use(administratorProducts);
 
 // port

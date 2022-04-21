@@ -8,26 +8,14 @@ var {
   administratorProductIDEditPost,
 } = require("../../controllers/administrator/products");
 
-router.get("/administrator/products", somemiddleware, administratorProducts);
+router.get("/administrator/products", administratorProducts);
 
-router.get(
-  "/administrator/product/:ID",
-  somemiddleware,
-  administratorProductID
-);
+router.get("/administrator/product/:ID", administratorProductID);
 
 router.post("/administrator/products/create", administratorProductsCreate);
 
-router.get(
-  "/administrator/product/:ID/edit",
-  somemiddleware,
-  administratorProductIDEditGet
-);
+router.get("/administrator/product/:ID/edit", administratorProductIDEditGet);
 
-router.post(
-  "/administrator/product/:ID/edit",
-  somemiddleware,
-  administratorProductIDEditPost
-);
+router.post("/administrator/product/:ID/edit", administratorProductIDEditPost);
 
 module.exports = router;
