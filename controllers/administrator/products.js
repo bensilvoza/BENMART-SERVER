@@ -1,4 +1,9 @@
+// libraries
 var express = require("express");
+var { storage } = require("../../cloudinary");
+var multer = require("multer");
+var upload = multer({ storage });
+
 var Product = require("../../models/product");
 var ProductImage = require("../../models/productImage");
 
@@ -6,52 +11,49 @@ async function administratorProducts() {
   // ...
 }
 
-async function administratorProductID() {
+async function administratorProductsID() {
   // ...
 }
 
-async function administratorProductsCreate() {
-  var image = {
-    ID: Math.floor(Math.random() * 1000000000),
-    url: "https://images.unsplash.com/photo-1523878288860-7ad281611901?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80",
+async function administratorProductsCreate(req, res) {
+  var images = [];
+  for (var i = 0; i < req.files.length; i++) {
+    var image = {};
+    (image["ID"] = Math.floor(Math.random() * 1000000000)),
+      (image["url"] = req.files[i]["path"]),
+      (image["filename"] = req.files[i]["filename"]);
+    images.push(image);
+  }
+
+  var productDetails = {
+    ID: req.body.ID,
+    name: req.body.name,
+    images: images,
+    description: req.body.description,
+    price: req.body.price,
+    quantity: req.body.quantity,
+    category: req.body.category,
   };
 
-  var productImage = new ProductImage(image);
-
-  await productImage.save();
-
-  var product = {
-    ID: Math.floor(Math.random() * 1000000000),
-    name: "Havaianas",
-    images: [], // array of product image schema
-    description: "Description here",
-    price: 999,
-    quantity: 30,
-    category: "slippers",
-  };
-
-  product["images"].push(image["ID"]);
-
-  // update product
-  product = new Product(product);
-  await product.save();
-  console.log("OK");
+  productDetails = new Product(productDetails);
+  await productDetails.save();
+  res.json({ message: "OK" });
 }
 
-async function administratorProductIDEditGet() {
+async function administratorProductsIDEditGet() {
   // ...
 }
 
-async function administratorProductIDEditPost() {
+async function administratorProductsIDEditPost() {
   // ...
 }
 
 module.exports = {
   administratorProducts,
-  administratorProductID,
+  administratorProductsID,
   administratorProductsCreate,
-  administratorProductIDEditGet,
-  administratorProductIDEditPost,
+  administratorProductsIDEditGet,
+  administratorProductsIDEditPost,
 };
 
 // below this line is a temporary file

@@ -1,21 +1,34 @@
+// libraries
 var express = require("express");
 var router = express.Router();
+var { storage } = require("../../cloudinary");
+var multer = require("multer");
+var upload = multer({ storage });
+
+// controllers
 var {
   administratorProducts,
-  administratorProductID,
+  administratorProductsID,
   administratorProductsCreate,
-  administratorProductIDEditGet,
-  administratorProductIDEditPost,
+  administratorProductsIDEditGet,
+  administratorProductsIDEditPost,
 } = require("../../controllers/administrator/products");
 
 router.get("/administrator/products", administratorProducts);
 
-router.get("/administrator/product/:ID", administratorProductID);
+router.get("/administrator/products/:ID", administratorProductsID);
 
-router.post("/administrator/products/create", administratorProductsCreate);
+router.post(
+  "/administrator/products/create",
+  upload.array("uploadedImage"),
+  administratorProductsCreate
+);
 
-router.get("/administrator/product/:ID/edit", administratorProductIDEditGet);
+router.get("/administrator/products/:ID/edit", administratorProductsIDEditGet);
 
-router.post("/administrator/product/:ID/edit", administratorProductIDEditPost);
+router.post(
+  "/administrator/products/:ID/edit",
+  administratorProductsIDEditPost
+);
 
 module.exports = router;
