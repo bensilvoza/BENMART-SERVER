@@ -38,7 +38,7 @@ app.use(administratorProducts);
 
 // port
 app.listen(process.env.PORT || 5000, function () {
-  console.log("Backend server is running.");
+  console.log("server is now running");
   console.log(".");
   console.log(".");
   console.log(".");

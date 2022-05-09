@@ -7,7 +7,6 @@ var customerAddressSchema = new mongoose.Schema({
   city: String,
   region: String,
   country: String,
-  addressDetails: String,
 });
 var CustomerAddress = mongoose.model("CustomerAddress", customerAddressSchema);
 

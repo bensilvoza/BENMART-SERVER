@@ -21,6 +21,12 @@ function register(req, res) {
   });
 }
 
+async function registerUpdate(req, res) {
+  await Customer.findOneAndUpdate({ ID: req.body.ID }, req.body);
+  res.json({ message: "OK" });
+}
+
 module.exports = {
   register,
+  registerUpdate,
 };
