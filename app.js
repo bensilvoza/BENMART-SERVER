@@ -9,6 +9,7 @@ var customerHome = require("./routes/customer/home");
 var customerProducts = require("./routes/customer/products");
 var customerRegister = require("./routes/customer/register");
 var customerLogin = require("./routes/customer/login");
+var orders = require("./routes/customer/orders");
 
 // admin routes
 var administratorProducts = require("./routes/administrator/products");
@@ -33,6 +34,7 @@ app.use(customerHome);
 app.use(customerProducts);
 app.use(customerRegister);
 app.use(customerLogin);
+app.use(orders);
 // admin
 app.use(administratorProducts);
 
