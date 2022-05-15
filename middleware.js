@@ -1,8 +1,8 @@
-// FORMAT OF TOKEN
-// Authorization: "Bearer token"
+const jwt = require("jsonwebtoken");
 
-// Verify Token
 function verifyToken(req, res, next) {
+  // FORMAT OF TOKEN
+  // Authorization: "Bearer token"
   // Get auth header value
   const bearerHeader = req.headers["authorization"];
   // Check if bearer is undefined
@@ -29,3 +29,8 @@ function verifyToken(req, res, next) {
     res.json({ message: "ERROR" });
   }
 }
+
+// export
+module.exports = {
+  verifyToken,
+};
