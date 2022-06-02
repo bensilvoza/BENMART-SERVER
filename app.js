@@ -11,6 +11,7 @@ var customerRegister = require("./routes/customer/register");
 var customerLogin = require("./routes/customer/login");
 var orders = require("./routes/customer/orders");
 var payment = require("./routes/customer/payment");
+var favoriteProducts = require("./routes/customer/favoriteProducts");
 
 // admin routes
 var administratorProducts = require("./routes/administrator/products");
@@ -37,6 +38,7 @@ app.use(customerRegister);
 app.use(customerLogin);
 app.use(orders);
 app.use(payment);
+app.use(favoriteProducts);
 // admin
 app.use(administratorProducts);
 
