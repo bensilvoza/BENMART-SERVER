@@ -3,6 +3,14 @@ var express = require("express");
 
 var FavoriteProducts = require("../../models/favoriteProducts");
 
+async function favoriteProductsList(req, res) {
+  var dbresponse = await FavoriteProducts.findOne({
+    customerEmail: req.body.customerEmail,
+  });
+
+  res.json(dbresponse.favoriteProducts);
+}
+
 async function favoriteProducts(req, res) {
   var fav;
   var customerEmail = req.body.customerEmail;
@@ -20,7 +28,20 @@ async function favoriteProducts(req, res) {
     });
   } else {
     // existing item
+    // no fave productsID must be the same
     fav = dbresponse;
+
+    for (var i = 0; i < fav.favoriteProducts.length; i++) {
+      if (fav.favoriteProducts[i]["productID"] == req.body.productID) {
+        // remove
+        fav.favoriteProducts.splice(i, 1);
+        await fav.save();
+        res.json("OK");
+        return;
+      }
+    }
+
+    // insert
     fav.favoriteProducts.push(faveProductID);
   }
 
@@ -29,5 +50,6 @@ async function favoriteProducts(req, res) {
 }
 
 module.exports = {
+  favoriteProductsList,
   favoriteProducts,
 };
