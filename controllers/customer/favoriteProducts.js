@@ -4,10 +4,12 @@ var express = require("express");
 var FavoriteProducts = require("../../models/favoriteProducts");
 
 async function favoriteProductsList(req, res) {
-  var dbresponse = await FavoriteProducts.findOne({
-    customerEmail: req.body.customerEmail,
-  });
+  // Retrieve the GET query string parameters using Express
+  var email = req.query.email;
 
+  var dbresponse = await FavoriteProducts.findOne({
+    customerEmail: email,
+  });
   res.json(dbresponse.favoriteProducts);
 }
 
