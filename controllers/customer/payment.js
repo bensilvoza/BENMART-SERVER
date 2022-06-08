@@ -11,8 +11,8 @@ function payment(req, res) {
     // configure
     paypal.configure({
       mode: "sandbox",
-      client_id: process.env.CLIENT_ID,
-      client_secret: process.env.CLIENT_SECRET,
+      client_id: process.env.PAYPAL_CLIENT_ID,
+      client_secret: process.env.PAYPAL_CLIENT_SECRET,
     });
 
     // create
@@ -22,7 +22,9 @@ function payment(req, res) {
       } else {
         for (let i = 0; i < payment.links.length; i++) {
           if (payment.links[i].rel === "approval_url") {
-            res.redirect(payment.links[i].href);
+            // res.redirect(payment.links[i].href);
+            res.json(payment.links[i].href);
+            return;
           }
         }
       }
