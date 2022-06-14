@@ -10,7 +10,12 @@ async function favoriteProductsList(req, res) {
   var dbresponse = await FavoriteProducts.findOne({
     customerEmail: email,
   });
-  res.json(dbresponse.favoriteProducts);
+
+  if (dbresponse == null) {
+    res.json([]);
+  } else {
+    res.json(dbresponse.favoriteProducts);
+  }
 }
 
 async function favoriteProducts(req, res) {

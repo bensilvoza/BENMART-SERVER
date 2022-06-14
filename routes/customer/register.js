@@ -10,7 +10,7 @@ var {
 
 router.post("/register", register);
 
-// edit address
+// edit
 router.post("/register/edit", registerUpdate);
 
 module.exports = router;
